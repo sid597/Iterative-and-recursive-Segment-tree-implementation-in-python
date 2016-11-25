@@ -1,0 +1,34 @@
+def build(a):
+    ''' This is an itereative implementation one can also use recursion to build the tree but I prefer iteration
+    
+    '''
+    
+    
+    n=len(a)
+    d = {}
+    if n%2==0:
+        j=n
+        for el in a:
+            d[j]=el
+            j+=1
+        for i in range(n-1,0,-1):
+            d[i]=min(d[2*i],d[2*i+1])
+            # print i,d[i]
+        return d
+    else:
+        po=a.pop()
+        j = n+1
+        d[n]=po
+        print j
+        for el in a:
+            d[j] = el
+            j += 1
+        for i in range(n - 1, 0, -1):
+            d[i] = min(d[2 * i], d[2 * i + 1])
+            # print i, d[i]
+        return d
+
+print build([18, 17, 13, 19, 15, 11, 20,2])
+
+
+
