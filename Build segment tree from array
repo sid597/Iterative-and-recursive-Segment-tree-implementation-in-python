@@ -1,6 +1,6 @@
 def build(a):
-    ''' This is an iterative implementation one can also use recursion to build the tree but I prefer iteration
-    
+    ''' 
+    This is an iterative implementation one can also use recursion to build the tree but I prefer iteration
     '''
     
     
