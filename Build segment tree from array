@@ -1,34 +1,14 @@
-def build(a):
-    ''' 
-    This is an iterative implementation one can also use recursion to build the tree but I prefer iteration
-    '''
-    
-    
+t={}
+for j in range(1,4*7+1):
+        t[j]=-1
+def build(a,v,start,end):
     n=len(a)
-    d = {}
-    if n%2==0:
-        j=n
-        for el in a:
-            d[j]=el
-            j+=1
-        for i in range(n-1,0,-1):
-            d[i]=min(d[2*i],d[2*i+1])
-            # print i,d[i]
-        return d
+    if start==end:
+        t[v]=a[start]
     else:
-        po=a.pop()
-        j = n+1
-        d[n]=po
-        print j
-        for el in a:
-            d[j] = el
-            j += 1
-        for i in range(n - 1, 0, -1):
-            d[i] = min(d[2 * i], d[2 * i + 1])
-            # print i, d[i]
-        return d
-
-print build([18, 17, 13, 19, 15, 11, 20,2])
-
-
-
+        mid=(start+end)/2
+        build(a,v*2,start,mid)
+        build(a,v*2+1,mid+1,end)
+        t[v]=min(t[2*v],t[2*v+1])
+    return t
+print build([18,17,13,19,15,11,20],1,0,6)
