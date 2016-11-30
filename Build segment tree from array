@@ -1,6 +1,4 @@
-t={}
-for j in range(1,4*7+1):
-        t[j]=-1
+t=[None]*2*n
 def build(a,v,start,end):
     n=len(a)
     if start==end:
