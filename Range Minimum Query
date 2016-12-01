@@ -1,0 +1,21 @@
+#This is an implementation of range minimum query along with example
+
+def rmq(node,segx,segy,qx,qy):
+    if qx>segy or qy<segx:
+        return inf
+    elif segx>=qx and segy<=qy:
+        return t[node]
+    else:
+        return min(rmq(node*2,segx,(segx+segy)/2,qx,qy),rmq(node*2+1,((segx+segy)/2)+1,segy,qx,qy))
+        
+        
+        
+        
+Here is a sample case :
+segment tree (t) = [None, 11, 13, 11, 17, 13, 11, 20, 18, 17, 13, 19, 15, 11]
+
+and query is :
+print rmq(1,1,7,1,3)
+
+returns : 13 
+        
