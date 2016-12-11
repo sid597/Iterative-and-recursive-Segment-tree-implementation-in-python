@@ -1,5 +1,6 @@
 #This is an implementation of range minimum query along with example
 
+inf=10**9+7
 def rmq(node,segx,segy,qx,qy):
     if qx>segy or qy<segx:
         return inf
