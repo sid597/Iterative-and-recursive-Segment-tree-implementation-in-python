@@ -1,0 +1,28 @@
+def build(s):
+    '''
+    This is an example of using segment trees foe calculating
+    sum queries i.e calculating the sum of elements in
+    a given range.
+
+
+    param s: the array on top of which segment tree is to be made
+    return: the segment tree
+
+    '''
+
+
+    t = [0] *2*(len(s)+1)           # We need an array to store the nodes
+                                    # and leaves of the tree.
+                                    # The length of this array is so because
+                                    # there are only this number of elements in
+                                    # in the tree
+
+    for j,k in enumerate(s):        # Copy all the elements in in array to the
+        t[2*len(s)-j]=s[j]          # array t .These elements are at the lowest
+                                    # level of the tree.
+
+    for i in range(len(s),0,-1):    # Building the segment tree with sum of elements
+                                    # You can also calculate minimum range query by
+        t[i]=(t[2*i]+t[2*i+1])      # changing this line to  t[i]=min(t[2*i],t[2*i+1]
+
+    return t
