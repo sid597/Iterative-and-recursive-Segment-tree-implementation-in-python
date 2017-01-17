@@ -1,5 +1,5 @@
-# segment-tree-for-RMQ
+# segment-tree
 
-This is my implementation of segment tree for range minimum queries
+This is my implementation of segment tree 
 
 

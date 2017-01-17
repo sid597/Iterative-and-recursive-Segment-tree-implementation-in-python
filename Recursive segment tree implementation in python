@@ -1,0 +1,58 @@
+import sys
+sys.setrecursionlimit(10**9)
+
+
+t=[None]*4*(10**7)
+# print t,len([18,17,13,19,15,11,20])
+def build(a,v,start,end):
+    n=len(a)
+    if start==end:
+        t[v]=a[start]
+    else:
+        mid=(start+end)/2
+        build(a,v*2,start,mid)
+        build(a,v*2+1,mid+1,end)
+        t[v]=(t[2*v]*t[2*v+1])%100
+    return t
+build(s,1,0,len(s)-1)
+
+
+
+
+def update(node,start,end,pos,new_valu):
+    if start==end:
+        t[node]=new_valu
+    else:
+        mid=(start+end)/2
+        print mid
+        if pos<=mid:
+            update(node*2,start,mid,pos,new_valu)
+        else:
+            update(node*2+1,mid+1,end,pos,new_valu)
+        t[node]=t[node*2]*t[node*2+1]
+    # return t
+print update(1,0,4,1,4)
+
+
+# def query(node,start,end,l,r):
+#     if l>r:
+#         return 1
+#     if l==start and  r==end:
+#         return t[node]
+#     mid=(start+end)/2
+#     return query(node*2,start,mid,l,min(r,mid))*query(node*2+1,mid+1,end,max(l,mid+1),r)
+# for i in range(2):
+#     l,r=map(int,raw_input().split())
+#     print query(1,0,4,l,r-1)
+
+
+def query(node,segx,segy,qx,qy):
+    if qx>segy or qy<segx:
+        return inf
+    elif segx>=qx and segy<=qy:
+        return t[node]
+    else:
+            return query(node*2,segx,(segx+segy)/2,qx,qy)*query(node*2+1,((segx+segy)/2)+1,segy,qx,qy)
+
+
+print query(1,0,4,1,1)
