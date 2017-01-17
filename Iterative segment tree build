@@ -26,3 +26,82 @@ def build(s):
         t[i]=(t[2*i]+t[2*i+1])      # changing this line to  t[i]=min(t[2*i],t[2*i+1]
 
     return t
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+-------------------------------------------------------------------------------------------------------------------------------
+
+
+'''  used this segment tree implementation to solve Codechef Jan 2017  : FOURSQ problem '''
+
+while True :
+    inp = 0
+    try:
+        for i in xrange(int(raw_input())):
+            m, q, z = map(int, raw_input().split())
+            s = map(int, raw_input().split())
+            s=s[::-1]
+            t = [1] *( 2 * (len(s) + 1))
+
+
+            def build():
+                # s=s[::-1]
+
+                # t = [1] *2*(len(s)+1)
+
+                for j, k in enumerate(s):
+                    t[2 * len(s) - j] = s[j]%z
+                # print t
+
+                for i in range(len(s), 0, -1):
+                    t[i] = (t[2 * i] * t[2 * i + 1])%z
+
+
+            build()
+            # print t
+
+            def update( p, value, n):  # set value at position p,n is the len of original list
+                p = p + n
+                t[p] = value%z
+                # print t
+                while p > 1:
+                    # print p
+                    t[p / 2] = (t[p] * t[p ^ 1])%z
+                    p /= 2
+
+
+
+            def query(l, r, n):
+                res = 1
+                l += n
+                r += n
+                # print t
+                # print t[l:r]
+                while l < r:
+                    if l % 2 == 1:
+                        # l += 1
+                        res= (res *t[l])%z
+                        l += 1
+                    if r % 2 == 1:
+                        r -= 1
+                        res =(res* t[r])%z
+                        # r-= 1
+                    l /= 2
+                    r /= 2
+                return res
+
+            for j in xrange(q):
+                qry = map(int, raw_input().split())
+
+                if qry[0] == 1:
+                    update(qry[1],qry[2],len(s))
+                    # print t
+                else:
+                    # print t
+                    mul=query(qry[1],qry[2]+1 , len(s))
+                    # print query(t, 1, 4, 5)
+                    # print mul
+                    print  ' '.join([str(i) for i in decompose(mul)])
+    except EOFError:
+        break
